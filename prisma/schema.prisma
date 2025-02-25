@@ -1,0 +1,53 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String // e.g., "user" or "agent"
+  createdAt DateTime @default(now())
+
+  Ticket Ticket[]
+
+  Comment Comment[]
+}
+
+model Ticket {
+  id          Int       @id @default(autoincrement())
+  customerId  Int
+  subject     String
+  description String
+  priority    String
+  status      String    @default("open") // e.g., "open", "in-progress", "closed"
+  createdAt   DateTime  @default(now())
+  
+  customer    User      @relation(fields: [customerId], references: [id])
+  comments    Comment[]
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  ticketId  Int
+  authorId  Int
+  text      String
+  createdAt DateTime  @default(now())
+  
+  ticket    Ticket    @relation(fields: [ticketId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+}
