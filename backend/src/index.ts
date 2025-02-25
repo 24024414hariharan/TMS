@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import express from "express";
 import bodyParser from "body-parser";
-import ticketRoutes from "../src/interfaces/http/routes/ticketRoutes";
-import authRoutes from "../src/interfaces/http/routes/authRoutes";
-import commentRoutes from "../src/interfaces/http/routes/commentRoutes";
-import knowledgeBaseRoutes from "../src/interfaces/http/routes/knowledgeBaseRoutes";
+import ticketRoutes from "./interfaces/http/routes/ticketRoutes";
+import authRoutes from "./interfaces/http/routes/authRoutes";
+import commentRoutes from "./interfaces/http/routes/commentRoutes";
+import knowledgeBaseRoutes from "./interfaces/http/routes/knowledgeBaseRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
