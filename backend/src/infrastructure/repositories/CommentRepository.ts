@@ -18,7 +18,15 @@ export class CommentRepository implements ICommentRepository {
   async findByTicketId(ticketId: number): Promise<Comment[]> {
     const comments = await prisma.comment.findMany({
       where: { ticketId },
+      include: {
+        author: {
+          select: {
+            role: true,
+          },
+        },
+      },
     });
+
     return comments as Comment[];
   }
 }

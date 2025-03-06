@@ -7,7 +7,6 @@ import { authenticateToken } from "../middleware/authMiddleware";
 const router = Router();
 const commentController = kernal.get<CommentController>(TYPES.CommentController);
 
-// Helper to wrap async route handlers.
 const asyncHandler = (
   fn: (req: Request, res: Response, next: NextFunction) => Promise<any>
 ): RequestHandler => {

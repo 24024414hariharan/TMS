@@ -14,7 +14,7 @@ export class LoginUseCase {
   async execute(
     email: string,
     password: string
-  ): Promise<{ token: string } | null> {
+  ): Promise<{ token: string; user: Record<string, any> } | null> {
     const user = await this.userRepository.findByEmail(email);
     if (!user) return null;
 
@@ -22,6 +22,6 @@ export class LoginUseCase {
     if (!isValid) return null;
 
     const token = this.authService.generateToken(user.id, user.role);
-    return { token };
+    return { token: token, user: { email: user.email, role: user.role } };
   }
 }
