@@ -194,6 +194,7 @@ const ViewTickets: React.FC = () => {
             <p>{ticket.description}</p>
             <div>
               <span>{ticket.priority}</span>
+              <br/>
               <span>{ticket.status}</span>
             </div>
           </div>
