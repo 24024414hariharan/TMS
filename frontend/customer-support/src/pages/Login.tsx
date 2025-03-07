@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post<LoginResponse>(
-        `${process.env.VITE_API_DOMAIN}/auth/login`,
+        `${import.meta.env.VITE_API_DOMAIN}/auth/login`,
         {
           email,
           password,
