@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post<LoginResponse>(
-        "http://localhost:4000/auth/login",
+        `${process.env.DOMAIN}/auth/login`,
         {
           email,
           password,

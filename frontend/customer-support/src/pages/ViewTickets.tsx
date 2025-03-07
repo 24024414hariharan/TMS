@@ -36,7 +36,7 @@ const ViewTickets: React.FC = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/tickets", {
+      const response = await axios.get(`${process.env.DOMAIN}/tickets`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setTickets(response.data);
@@ -49,7 +49,7 @@ const ViewTickets: React.FC = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:4000/tickets/search?query=${searchQuery}`,
+        `${process.env.DOMAIN}/tickets/search?query=${searchQuery}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -64,7 +64,7 @@ const ViewTickets: React.FC = () => {
     setSelectedTicket(ticket);
     try {
       const response = await axios.get(
-        `http://localhost:4000/tickets/${ticket.id}/comments`,
+        `${process.env.DOMAIN}/tickets/${ticket.id}/comments`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -80,7 +80,7 @@ const ViewTickets: React.FC = () => {
     if (!selectedTicket) return;
     try {
       await axios.post(
-        `http://localhost:4000/tickets/${selectedTicket.id}/comments`,
+        `${process.env.DOMAIN}/tickets/${selectedTicket.id}/comments`,
         { text: newComment },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -97,7 +97,7 @@ const ViewTickets: React.FC = () => {
     if (!selectedTicket) return;
     try {
       await axios.delete(
-        `http://localhost:4000/tickets/${selectedTicket.id}`,
+        `${process.env.DOMAIN}/tickets/${selectedTicket.id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -113,7 +113,7 @@ const ViewTickets: React.FC = () => {
     if (!selectedTicket) return;
     try {
       await axios.put(
-        `http://localhost:4000/tickets/${selectedTicket.id}`,
+        `${process.env.DOMAIN}/tickets/${selectedTicket.id}`,
         { status: newStatus },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -137,7 +137,7 @@ const ViewTickets: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:4000/tickets",
+        `${process.env.DOMAIN}/tickets`,
         {
           subject: newSubject,
           description: newDescription,
