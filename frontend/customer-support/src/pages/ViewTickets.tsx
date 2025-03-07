@@ -6,8 +6,8 @@ export interface Ticket {
   id: number;
   subject: string;
   description: string;
-  priority: 'Low' | 'Medium' | 'High';
-  status: 'Open' | 'In Progress' | 'Closed';
+  priority: "Low" | "Medium" | "High";
+  status: "Open" | "In Progress" | "Closed";
 }
 
 export interface Comment {
@@ -23,6 +23,11 @@ const ViewTickets: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newSubject, setNewSubject] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newPriority, setNewPriority] = useState<Ticket["priority"]>("Low");
+
   const userRole = localStorage.getItem("role") || "user";
 
   useEffect(() => {
@@ -34,18 +39,7 @@ const ViewTickets: React.FC = () => {
       const response = await axios.get("http://localhost:4000/tickets", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-      
-      const validTickets = response.data.map((ticket: Ticket) => ({
-        ...ticket,
-        priority: ['Low', 'Medium', 'High'].includes(ticket.priority)
-          ? ticket.priority
-          : 'Low',
-        status: ['Open', 'In Progress', 'Closed'].includes(ticket.status)
-          ? ticket.status
-          : 'Open'
-      }));
-      
-      setTickets(validTickets);
+      setTickets(response.data);
     } catch (error) {
       console.error("Error fetching tickets:", error);
     }
@@ -99,84 +93,178 @@ const ViewTickets: React.FC = () => {
     }
   };
 
-  const renderPriorityBadge = (priority: Ticket['priority']) => {
-    return <span className={`ticket-priority ticket-priority-${priority.toLowerCase()}`}>{priority}</span>;
+  const handleDeleteTicket = async () => {
+    if (!selectedTicket) return;
+    try {
+      await axios.delete(
+        `http://localhost:4000/tickets/${selectedTicket.id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      setSelectedTicket(null);
+      fetchTickets();
+    } catch (error) {
+      console.error("Error deleting ticket:", error);
+    }
   };
 
-  const renderStatusBadge = (status: Ticket['status']) => {
-    return <span className={`ticket-status ticket-status-${status.toLowerCase().replace(' ', '-')}`}>{status}</span>;
+  const handleStatusChange = async (newStatus: Ticket["status"]) => {
+    if (!selectedTicket) return;
+    try {
+      await axios.put(
+        `http://localhost:4000/tickets/${selectedTicket.id}`,
+        { status: newStatus },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      setSelectedTicket({ ...selectedTicket, status: newStatus });
+      setTickets((prevTickets) =>
+        prevTickets.map((ticket) =>
+          ticket.id === selectedTicket.id
+            ? { ...ticket, status: newStatus }
+            : ticket
+        )
+      );
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to update ticket status.");
+    }
+  };
+
+  const handleCreateTicket = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:4000/tickets",
+        {
+          subject: newSubject,
+          description: newDescription,
+          priority: newPriority,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setShowCreateModal(false);
+      setNewSubject("");
+      setNewDescription("");
+      setNewPriority("Low");
+      fetchTickets();
+    } catch (error) {
+      console.error("Error creating ticket:", error);
+      alert("Failed to create ticket. Please try again.");
+    }
   };
 
   return (
     <div className="page-container">
       <div className="top-bar">
-        <div className="top-controls">
-          <form onSubmit={handleSearch} className="search-form">
-            <input
-              type="text"
-              placeholder="Search tickets..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button type="submit">Search</button>
-          </form>
-          <button className="create-ticket-btn">+ Create Ticket</button>
-        </div>
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            placeholder="Search tickets..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+        {(userRole === "user" || userRole === "agent") && (
+          <button
+            className="create-ticket-btn"
+            onClick={() => setShowCreateModal(true)}
+          >
+            + Create Ticket
+          </button>
+        )}
       </div>
-      
+
       <div className="ticket-grid">
         {tickets.map((ticket) => (
-          <div 
-            key={ticket.id} 
+          <div
+            key={ticket.id}
             className="ticket-card"
             onClick={() => openTicketDetails(ticket)}
           >
-            <h3>{ticket.subject || 'Untitled Ticket'}</h3>
-            <p>{ticket.description || 'No description provided'}</p>
+            <h3>{ticket.subject}</h3>
+            <p>{ticket.description}</p>
             <div>
-              {renderPriorityBadge(ticket.priority)}
-              {renderStatusBadge(ticket.status)}
+              <span>{ticket.priority}</span>
+              <span>{ticket.status}</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Ticket Details Modal */}
       {selectedTicket && (
         <div className="modal-overlay">
           <div className="modal">
             <h2>{selectedTicket.subject}</h2>
             <p>{selectedTicket.description}</p>
             <p>Priority: {selectedTicket.priority}</p>
-            <p>Status: {selectedTicket.status}</p>
+            <p>
+              Status:{" "}
+              {userRole === "agent" ? (
+                <select
+                  value={selectedTicket.status}
+                  onChange={(e) =>
+                    handleStatusChange(e.target.value as Ticket["status"])
+                  }
+                >
+                  <option>Open</option>
+                  <option>In Progress</option>
+                  <option>Closed</option>
+                </select>
+              ) : (
+                selectedTicket.status
+              )}
+            </p>
 
             <h3>Comments:</h3>
-            {comments.length === 0 ? (
-              <p>No comments yet.</p>
-            ) : (
-              comments.map((comment) => (
-                <div key={comment.id} className="comment-item">
-                  <p>{comment.text}</p>
-                  <small>
-                    {comment.author.role} • {new Date(comment.createdAt).toLocaleString()}
-                  </small>
-                </div>
-              ))
-            )}
+            {comments.map((comment) => (
+              <div key={comment.id}>
+                <p>{comment.text}</p>
+                <small>{comment.author.role} • {new Date(comment.createdAt).toLocaleString()}</small>
+              </div>
+            ))}
 
             <form onSubmit={handleAddComment}>
               <textarea
-                placeholder="Add a comment..."
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Add a comment..."
                 required
               />
               <button type="submit">Submit Comment</button>
             </form>
 
-            <button className="close-modal" onClick={() => setSelectedTicket(null)}>
-              Close
-            </button>
+            {userRole === "agent" && (
+              <button onClick={handleDeleteTicket}>Delete Ticket</button>
+            )}
+            <button onClick={() => setSelectedTicket(null)}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {showCreateModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Create Ticket</h2>
+            <form onSubmit={handleCreateTicket}>
+              <input value={newSubject} onChange={(e) => setNewSubject(e.target.value)} placeholder="Subject" required />
+              <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)} placeholder="Description" required />
+              <select value={newPriority} onChange={(e) => setNewPriority(e.target.value as Ticket["priority"])}>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+              <button type="submit">Create</button>
+            </form>
+            <button onClick={() => setShowCreateModal(false)}>Cancel</button>
           </div>
         </div>
       )}
