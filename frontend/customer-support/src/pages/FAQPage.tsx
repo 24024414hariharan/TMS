@@ -19,7 +19,7 @@ const FAQPage: React.FC = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await axios.get(`${process.env.DOMAIN}/knowledgebase`, {
+      const response = await axios.get(`${process.env.API_DOMAIN}/knowledgebase`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setArticles(response.data);
@@ -31,7 +31,7 @@ const FAQPage: React.FC = () => {
   const openArticle = async (articleId: number) => {
     try {
       const response = await axios.get(
-        `${process.env.DOMAIN}/knowledgebase/${articleId}`,
+        `${process.env.API_DOMAIN}/knowledgebase/${articleId}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
