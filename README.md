@@ -1,4 +1,3 @@
-```markdown
 ## Software Architecture Project
 
 ### Overview
