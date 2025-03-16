@@ -1,32 +1,32 @@
-## Software Architecture Project
+# Software Architecture Project
 
-### Overview
-This repository contains a full-stack application designed using **Domain-Driven Design (DDD)** and follows the **Microkernel architecture** pattern. The backend is built using **Node.js with TypeScript**, while the frontend is developed with **React and TypeScript**.
+## Overview
+This repository contains a **full-stack application** with a **Node.js backend** and a **React frontend**. The backend follows **Domain-Driven Design (DDD)** and implements the **Microkernel Architecture** pattern, utilizing **InversifyJS** for dependency injection. The frontend is developed using **React and TypeScript** for a seamless user experience.
 
-### Key Features
-- **Microkernel Architecture** for a modular and scalable codebase.
-- **DDD principles** to maintain a clean separation of concerns.
-- **InversifyJS** for dependency injection.
+## Key Features
+- **Microkernel Architecture** for a modular and scalable backend.
+- **Domain-Driven Design (DDD)** to ensure clear separation of concerns.
+- **InversifyJS** for dependency injection in the backend.
 - **Prisma ORM** for database management.
 - **JWT-based authentication** for security.
 - **React with TypeScript** for frontend development.
 - **API communication via Axios** for client-server interaction.
 - **Unit testing** with Jest and Testing Library.
 
-### Prerequisites
+## Prerequisites
 - **Node.js** (>= 18.x)
 - **npm** (>= 8.x)
 - **PostgreSQL database**
 
-### Installation
+## Installation
 
-#### Clone the Repository
+### Clone the Repository
 ```sh
 git clone https://github.com/24024414hariharan/TMS.git
 cd TMS
 ```
 
-#### Backend Setup (software-architecture)
+### Backend Setup (software-architecture)
 1. Navigate to the backend directory:
 ```sh
 cd <backend-directory>
@@ -57,7 +57,7 @@ Note: You can also run `npx prisma migrate dev` without a migration name to sync
 npm run dev
 ```
 
-#### Frontend Setup (customer-support)
+### Frontend Setup (customer-support)
 1. Navigate to the frontend directory:
 ```sh
 cd <frontend-directory>
@@ -79,9 +79,9 @@ REACT_APP_API_DOMAIN=http://localhost:<port>
 npm start
 ```
 
-### Scripts
+## Scripts
 
-#### Backend
+### Backend
 ```json
 "scripts": {
   "build": "tsc",
@@ -91,7 +91,7 @@ npm start
 }
 ```
 
-#### Frontend
+### Frontend
 ```json
 "scripts": {
   "start": "react-scripts start",
@@ -101,36 +101,36 @@ npm start
 }
 ```
 
-### Prisma Migrations
+## Prisma Migrations
 Prisma is used to manage database schema and migrations.
 
-#### Initialize Prisma
+### Initialize Prisma
 ```sh
 npx prisma init
 ```
 
-#### Create a Migration
+### Create a Migration
 ```sh
 npx prisma migrate dev --name <migration-name>
 ```
 Note: You can also run `npx prisma migrate dev` without a migration name to sync the existing migrations if they are already created.
 
-#### Apply Migrations
+### Apply Migrations
 ```sh
 npx prisma migrate deploy
 ```
 
-#### Generate Prisma Client
+### Generate Prisma Client
 ```sh
 npx prisma generate
 ```
 
-#### Reset Database
+### Reset Database
 ```sh
 npx prisma migrate reset
 ```
 
-### Development Workflow
+## Development Workflow
 - Watch Mode: Auto-recompile TypeScript files on changes
 ```sh
 npm run dev
@@ -141,31 +141,30 @@ npm run dev
 npm start
 ```
 
-### Testing
+## Testing
 
-#### Backend
+### Backend
 - Unit tests written with Jest.
 - Run tests with:
 ```sh
 npm test
 ```
 
-#### Frontend
+### Frontend
 - Uses React Testing Library and Jest.
 - Run tests with:
 ```sh
 npm test
 ```
 
-### Contribution Guidelines
+## Contribution Guidelines
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
 3. Commit changes (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
 
-### Code Maintainers
+## Code Maintainers
 | Name | Student ID | Batch |
 | --- | --- | --- |
-| Hari Haran Rathinakumar | [ID appears to be incomplete in original text] | [Not provided in original text] |
-```
+| Hari Haran Rathinakumar | 24024414 | 2024-25 |
