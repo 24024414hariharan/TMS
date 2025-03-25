@@ -7,13 +7,14 @@ WORKDIR /app
 
 # Copy package files and install dependencies securely
 COPY package*.json ./
-RUN npm install --ignore-scripts && \
-    npx prisma generate && \
-    npm run build
+RUN npm install --ignore-scripts
 
-# Copy only necessary files to keep the image secure and lightweight
-COPY tsconfig.json ./
+# Copy Prisma schema before running `prisma generate`
 COPY prisma ./prisma
+RUN npx prisma generate
+
+# Copy remaining necessary files
+COPY tsconfig.json ./
 COPY src ./src
 COPY config ./config
 COPY inversify.config.ts inversify.types.ts ./
