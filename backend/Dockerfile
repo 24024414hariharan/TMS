@@ -1,30 +1,22 @@
+# Use an official Node.js runtime as a base image
 FROM node:18-alpine
 
-# Create and use a non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package files and install dependencies securely
+# Copy only package.json and package-lock.json to the container
 COPY package*.json ./
-RUN npm install --ignore-scripts
 
-# Copy Prisma schema before running `prisma generate`
-COPY prisma ./prisma
-RUN npx prisma generate
+# Install dependencies, run build, and generate Prisma files in a single RUN command
+RUN npm install --ignore-scripts && \
+    npm run build && \
+    npx prisma generate
 
-# Copy remaining necessary files
-COPY tsconfig.json ./
-COPY src ./src
-COPY config ./config
-COPY inversify.config.ts inversify.types.ts ./
+# Copy the rest of the application code, excluding files specified in .dockerignore
+COPY . .
 
-# Change ownership of the app directory to the non-root user
-RUN chown -R appuser:appgroup /app
-
-# Switch to the non-root user
-USER appuser
-
+# Expose the necessary port (assuming your app uses 4000)
 EXPOSE 4000
 
+# Start the application
 CMD ["npm", "start"]
