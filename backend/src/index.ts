@@ -8,6 +8,9 @@ import commentRoutes from "./interfaces/http/routes/commentRoutes";
 import knowledgeBaseRoutes from "./interfaces/http/routes/knowledgeBaseRoutes";
 
 const app = express();
+
+app.disable("x-powered-by");
+
 const PORT = process.env.PORT || 3000;
 
 app.use(
