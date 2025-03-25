@@ -6,7 +6,7 @@ import { Ticket } from "../../domain/ticket/Ticket";
 @injectable()
 export class SearchTicketsUseCase {
   constructor(
-    @inject(TYPES.ITicketRepository) private ticketRepository: ITicketRepository
+    @inject(TYPES.ITicketRepository) private readonly ticketRepository: ITicketRepository
   ) {}
 
   async execute(query: string, userId: number, role: string): Promise<Ticket[]> {

@@ -8,9 +8,9 @@ import { GetArticleUseCase } from "../../../application/knowledgeBase/GetArticle
 export class KnowledgeBaseController {
   constructor(
     @inject(TYPES.ListArticlesUseCase)
-    private listArticlesUseCase: ListArticlesUseCase,
+    private readonly listArticlesUseCase: ListArticlesUseCase,
     @inject(TYPES.GetArticleUseCase)
-    private getArticleUseCase: GetArticleUseCase
+    private readonly getArticleUseCase: GetArticleUseCase
   ) {}
 
   async listArticles(req: Request, res: Response) {

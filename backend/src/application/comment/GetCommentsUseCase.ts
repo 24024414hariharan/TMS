@@ -7,7 +7,7 @@ import { Comment } from "../../domain/comment/Comment";
 export class GetCommentsUseCase {
   constructor(
     @inject(TYPES.ICommentRepository)
-    private commentRepository: ICommentRepository
+    private readonly commentRepository: ICommentRepository
   ) {}
 
   async execute(ticketId: number): Promise<Comment[]> {

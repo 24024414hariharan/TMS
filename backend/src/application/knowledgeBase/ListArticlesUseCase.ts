@@ -7,7 +7,7 @@ import { Article } from "../../domain/knowledgeBase/Article";
 export class ListArticlesUseCase {
   constructor(
     @inject(TYPES.IKnowledgeBaseRepository)
-    private kbRepository: IKnowledgeBaseRepository
+    private readonly kbRepository: IKnowledgeBaseRepository
   ) {}
 
   async execute(): Promise<Article[]> {

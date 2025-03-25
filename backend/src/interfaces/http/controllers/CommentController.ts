@@ -8,9 +8,9 @@ import { GetCommentsUseCase } from "../../../application/comment/GetCommentsUseC
 export class CommentController {
   constructor(
     @inject(TYPES.AddCommentUseCase)
-    private addCommentUseCase: AddCommentUseCase,
+    private readonly addCommentUseCase: AddCommentUseCase,
     @inject(TYPES.GetCommentsUseCase)
-    private getCommentsUseCase: GetCommentsUseCase
+    private readonly getCommentsUseCase: GetCommentsUseCase
   ) {}
 
   async addComment(req: Request, res: Response) {

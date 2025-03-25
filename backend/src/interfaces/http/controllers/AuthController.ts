@@ -7,8 +7,8 @@ import TYPES from "../../../../inversify.types";
 @injectable()
 export class AuthController {
   constructor(
-    @inject(TYPES.LoginUseCase) private loginUseCase: LoginUseCase,
-    @inject(TYPES.LogoutUseCase) private logoutUseCase: LogoutUseCase
+    @inject(TYPES.LoginUseCase) private readonly loginUseCase: LoginUseCase,
+    @inject(TYPES.LogoutUseCase) private readonly logoutUseCase: LogoutUseCase
   ) {}
   async login(req: Request, res: Response) {
     const { email, password } = req.body;

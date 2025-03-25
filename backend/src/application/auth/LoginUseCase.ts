@@ -7,8 +7,9 @@ import TYPES from "../../../inversify.types";
 @injectable()
 export class LoginUseCase {
   constructor(
-    @inject(TYPES.IUserRepository) private userRepository: IUserRepository,
-    @inject(TYPES.AuthService) private authService: AuthService
+    @inject(TYPES.IUserRepository)
+    private readonly userRepository: IUserRepository,
+    @inject(TYPES.AuthService) private readonly authService: AuthService
   ) {}
 
   async execute(

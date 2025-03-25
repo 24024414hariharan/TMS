@@ -13,16 +13,17 @@ import { AuthenticatedRequest } from "../middleware/authMiddleware";
 export class TicketController {
   constructor(
     @inject(TYPES.CreateTicketUseCase)
-    private createTicketUseCase: CreateTicketUseCase,
+    private readonly createTicketUseCase: CreateTicketUseCase,
     @inject(TYPES.ListTicketsUseCase)
-    private listTicketsUseCase: ListTicketsUseCase,
-    @inject(TYPES.GetTicketUseCase) private getTicketUseCase: GetTicketUseCase,
+    private readonly listTicketsUseCase: ListTicketsUseCase,
+    @inject(TYPES.GetTicketUseCase)
+    private readonly getTicketUseCase: GetTicketUseCase,
     @inject(TYPES.UpdateTicketUseCase)
-    private updateTicketUseCase: UpdateTicketUseCase,
+    private readonly updateTicketUseCase: UpdateTicketUseCase,
     @inject(TYPES.DeleteTicketUseCase)
-    private deleteTicketUseCase: DeleteTicketUseCase,
+    private readonly deleteTicketUseCase: DeleteTicketUseCase,
     @inject(TYPES.SearchTicketsUseCase)
-    private searchTicketsUseCase: SearchTicketsUseCase
+    private readonly searchTicketsUseCase: SearchTicketsUseCase
   ) {}
 
   async createTicket(req: Request, res: Response) {

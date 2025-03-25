@@ -13,7 +13,7 @@ export interface UpdateTicketDTO {
 @injectable()
 export class UpdateTicketUseCase {
   constructor(
-    @inject(TYPES.ITicketRepository) private ticketRepository: ITicketRepository
+    @inject(TYPES.ITicketRepository) private readonly ticketRepository: ITicketRepository
   ) {}
 
   async execute(
