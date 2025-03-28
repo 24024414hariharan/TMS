@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { Response, NextFunction, RequestHandler } from "express";
 import { AuthenticatedRequest } from "./authMiddleware";
 
 export const requireRole = (allowedRoles: string | string[]): RequestHandler => {

@@ -8,7 +8,6 @@ import {
 import { kernal } from "../../../../inversify.config";
 import TYPES from "../../../../inversify.types";
 import { KnowledgeBaseController } from "../controllers/KnowledgeBaseController";
-import { authenticateToken } from "../middleware/authMiddleware";
 
 const router = Router();
 const kbController = kernal.get<KnowledgeBaseController>(
