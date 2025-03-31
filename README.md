@@ -13,7 +13,6 @@ This repository contains a **full-stack application** with a **Node.js backend**
 - **JWT-based authentication** for security.
 - **React with TypeScript** for frontend development.
 - **API communication via Axios** for client-server interaction.
-- **Unit testing** with Jest and Testing Library.
 
 ## Prerequisites
 - **Node.js** (>= 18.x)
@@ -89,7 +88,6 @@ npm start
   "build": "tsc",
   "start": "node dist/src/index.js",
   "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-  "test": "jest"
 }
 ```
 
@@ -98,7 +96,7 @@ npm start
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
-  "test": "react-scripts test",
+  "": "react-scripts ",
   "eject": "react-scripts eject"
 }
 ```
