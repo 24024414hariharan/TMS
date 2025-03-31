@@ -85,9 +85,10 @@ npm start
 ### Backend
 ```json
 "scripts": {
-  "build": "tsc",
-  "start": "node dist/src/index.js",
-  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+   "build": "tsc",
+   "start": "node dist/src/index.js",
+   "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+   "test": "jest"
 }
 ```
 
@@ -96,7 +97,7 @@ npm start
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",
-  "": "react-scripts ",
+  "test": "react-scripts test",
   "eject": "react-scripts eject"
 }
 ```
