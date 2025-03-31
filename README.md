@@ -168,7 +168,7 @@ npm test
 ### **System Architecture**  
 Below is the architecture diagram illustrating the structure of our backend application:  
 
-![Component Diagram](assets/assets/Component.png)
+![Component Diagram](assets/Component.png)
 
 
 ## Code Maintainers
