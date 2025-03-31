@@ -143,22 +143,6 @@ npm run dev
 npm start
 ```
 
-## Testing
-
-### Backend
-- Unit tests written with Jest.
-- Run tests with:
-```sh
-npm test
-```
-
-### Frontend
-- Uses React Testing Library and Jest.
-- Run tests with:
-```sh
-npm test
-```
-
 ## Contribution Guidelines
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
