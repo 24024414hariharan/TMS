@@ -164,6 +164,13 @@ npm test
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
 
+
+### **System Architecture**  
+Below is the architecture diagram illustrating the structure of our backend application:  
+
+![Component Diagram](assets/assets/Component.png)
+
+
 ## Code Maintainers
 | Name | Student ID | Batch |
 | --- | --- | --- |
