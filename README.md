@@ -169,9 +169,15 @@ npm test
 Below is the architecture diagram illustrating the structure of our backend application:  
 
 ## Component Diagram
+You can view the diagrams in Lucidchart:  
+[Lucid Link](https://lucid.app/lucidchart/1a14c95f-0933-42aa-8fdd-8e8ea4a1db56/edit?invitationId=inv_a2805419-e6d1-41ca-96de-1a9aeb7a50ed)
+
 ![Component Diagram](assets/Component.png)
 
 ## Deployment Diagram
+You can view the diagrams in Lucidchart:  
+[Lucid Link](https://lucid.app/lucidchart/a17bd31f-834f-4652-b4b3-5f7856ab7efc/edit?invitationId=inv_7d158303-ab0b-4685-9f1e-25b162eaaf32)
+
 ![Deployment Diagram](assets/Deployment.png)
 
 
