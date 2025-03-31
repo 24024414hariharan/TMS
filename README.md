@@ -1,5 +1,5 @@
 # Software Architecture Project
-## Tour Manage System - Customer Support Module
+## Tour Management System - Customer Support Module
 
 
 ## Overview
